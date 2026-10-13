@@ -2,7 +2,7 @@
 
 Catalyst PIM — a product information management system that keeps a WooCommerce catalog consistent, with variable products, attribute sets and observable two-way sync.
 
-> Screenshot placeholder: add `docs/screenshots/overview.png` to show the catalog overview here.
+![Catalyst PIM Catalog Overview](docs/screenshots/overview.png)
 
 ## The problem
 
