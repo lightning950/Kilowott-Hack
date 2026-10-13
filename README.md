@@ -42,6 +42,32 @@ Product data is commonly split between spreadsheets and store administration. Ma
 5. Run `npm run dev`.
 6. Open `http://localhost:5173`; the API is at `http://localhost:4000`.
 
+## Using the PIM
+
+Use this walkthrough to evaluate the main workflow. Start with `npm run db:seed:full` in mock mode to populate products in every sync state, then open the web app.
+
+| Area | What it shows | What to try |
+|---|---|---|
+| **Overview** | Catalog totals by status, pending work, recent activity, and the WooCommerce connection indicator. | Select a status total to filter Products. Use **Sync pending** to push every draft, out-of-sync, or failed product. The **Needs attention** panel lists failed products first, then out-of-sync products, then drafts. |
+| **Products** | Searchable, filterable, paginated catalog table. | Filter by status or type; select rows and sync only that selection; use **Import from store** in mock or real store mode; create a product with **New product**. |
+| **Product editor** | Product details, media, price, inventory, attributes, variations, and WooCommerce state. | Create a simple product and save it, then choose **Sync now**. Edit its price and observe the status change to out of sync before syncing again. |
+| **Variable product editor** | Attribute options and the generated variation grid. | Choose variable type, add attributes such as Size and Color, save, then choose **Generate variations**. Edit variation price or stock inline. After changing options, save and **Regenerate** before sync; matching variations retain their data. |
+| **WooCommerce panel** | Current status, last sync time, errors, and the action to sync or retry. | A draft becomes synced after a successful store write. A variable product without generated or current variations shows the reason sync is blocked. |
+| **Attribute sets** | Reusable attribute templates and the number of products using each one. | Create a set such as Clothing with Size and Color. Select it while creating a variable product to prefill its attribute options. |
+| **Sync log** | Create, update, delete, and import outcomes with duration, message, and warnings. | Filter by action or result. Open a row to inspect its full error message and image-warning details. |
+| **Mock store** | A local storefront at `http://localhost:4000/mock-store`. | Sync a product, then open its store URL from the product editor. The page refreshes every five seconds and shows simple prices or variable-price ranges. |
+
+### Suggested judge flow
+
+1. Run `npm run db:seed:full` and start the app in mock mode.
+2. Open **Overview** and confirm that Draft, Out of sync, Failed, and Synced counts are non-zero.
+3. Open **Products**, filter by Draft, select a product, and sync it. Confirm its status becomes Synced and it appears in the mock store.
+4. Edit the same product price, save, and confirm it becomes Out of sync. Sync again and inspect the update in **Sync log**.
+5. Open a variable product, inspect its variation grid, change an attribute option, then regenerate variations before syncing.
+6. Use **Import from store** to import the mock-store-only products seeded by the full scenario. The locally edited import-conflict product remains unchanged.
+
+The sidebar connection indicator reports whether the PIM is connected to the mock store or a configured WooCommerce store. Use the theme control there to switch light and dark mode.
+
 ## Connecting a real WooCommerce store
 
 Set permalinks to Post name, create a Read/Write REST API key, then set `WOO_MODE=real`, `WOO_URL`, `WOO_KEY`, and `WOO_SECRET` in `.env`. Restart, check the sidebar indicator, and use Import from store. The client uses Basic auth over HTTPS and OAuth 1.0a signatures over HTTP.
