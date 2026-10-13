@@ -22,7 +22,7 @@ data/
 # Logs
 *.log
 npm-debug.log*
-logs/
+/logs/
 
 # Coverage
 coverage/

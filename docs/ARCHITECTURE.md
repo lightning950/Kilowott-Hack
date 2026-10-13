@@ -4,17 +4,17 @@ Catalyst PIM is a TypeScript monorepo with a React web application, an Express A
 
 ```mermaid
 flowchart LR
-  Web[React UI] --> API[Express API]
-  API --> Routes[Routes]
-  Routes --> Services[Services]
-  Services --> Repos[Repositories]
-  Repos --> DB[SQLite]
-  Services --> Sync[Sync and import]
-  Sync --> Adapter[Store adapter]
-  Adapter --> Woo[WooCommerce REST]
-  Adapter --> Mock[Mock store]
-  Shared[Shared Zod contracts] --> Web
-  Shared --> API
+  A["React UI"] --> B["Express API"]
+  B --> C["Routes"]
+  C --> D["Services"]
+  D --> E["Repositories"]
+  E --> F["SQLite"]
+  D --> G["Sync and import"]
+  G --> H["Store adapter"]
+  H --> I["WooCommerce REST"]
+  H --> J["Mock store"]
+  K["Shared Zod contracts"] --> A
+  K --> B
 ```
 
 ## Layering rules
@@ -119,8 +119,27 @@ erDiagram
   ATTRIBUTE_SETS ||--o{ PRODUCTS : supplies
   PRODUCTS ||--o{ VARIATIONS : contains
   PRODUCTS ||--o{ SYNC_LOGS : records
-  ATTRIBUTE_SETS { int id string name string attributes }
-  PRODUCTS { int id string sku int woo_id string sync_status }
-  VARIATIONS { int id string sku string combo_key int woo_variation_id }
-  SYNC_LOGS { int id string action string status int duration_ms }
+  ATTRIBUTE_SETS {
+    int id PK
+    string name
+    string attributes
+  }
+  PRODUCTS {
+    int id PK
+    string sku
+    int woo_id
+    string sync_status
+  }
+  VARIATIONS {
+    int id PK
+    string sku
+    string combo_key
+    int woo_variation_id
+  }
+  SYNC_LOGS {
+    int id PK
+    string action
+    string status
+    int duration_ms
+  }
 ```

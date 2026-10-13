@@ -2,7 +2,7 @@
 
 Catalyst PIM — a product information management system that keeps a WooCommerce catalog consistent, with variable products, attribute sets and observable two-way sync.
 
-![Overview screenshot](docs/screenshots/overview.png)
+> Screenshot placeholder: add `docs/screenshots/overview.png` to show the catalog overview here.
 
 ## The problem
 
@@ -52,18 +52,18 @@ The web and API share Zod schemas and TypeScript contracts. Routes validate inpu
 
 ```mermaid
 flowchart LR
-  Browser[React UI] --> Proxy[Vite proxy]
-  Proxy --> API[Express API]
-  API --> Routes[Routes]
-  Routes --> Services[Services]
-  Services --> Repos[Repositories]
-  Repos --> SQLite[SQLite]
-  Services --> Sync[Sync service]
-  Sync --> Adapter[Store adapter]
-  Adapter --> Woo[WooCommerce REST]
-  Adapter --> Mock[Mock store]
-  Shared[Shared contracts] --> Browser
-  Shared --> API
+  A["React UI"] --> B["Vite proxy"]
+  B --> C["Express API"]
+  C --> D["Routes"]
+  D --> E["Services"]
+  E --> F["Repositories"]
+  F --> G["SQLite"]
+  E --> H["Sync service"]
+  H --> I["Store adapter"]
+  I --> J["WooCommerce REST"]
+  I --> K["Mock store"]
+  L["Shared contracts"] --> A
+  L --> C
 ```
 
 ## Sync flow
@@ -122,10 +122,29 @@ erDiagram
   ATTRIBUTE_SETS ||--o{ PRODUCTS : supplies
   PRODUCTS ||--o{ VARIATIONS : contains
   PRODUCTS ||--o{ SYNC_LOGS : records
-  ATTRIBUTE_SETS { int id string name string attributes }
-  PRODUCTS { int id string sku int woo_id string sync_status }
-  VARIATIONS { int id string sku string combo_key int woo_variation_id }
-  SYNC_LOGS { int id string action string status int duration_ms }
+  ATTRIBUTE_SETS {
+    int id PK
+    string name
+    string attributes
+  }
+  PRODUCTS {
+    int id PK
+    string sku
+    int woo_id
+    string sync_status
+  }
+  VARIATIONS {
+    int id PK
+    string sku
+    string combo_key
+    int woo_variation_id
+  }
+  SYNC_LOGS {
+    int id PK
+    string action
+    string status
+    int duration_ms
+  }
 ```
 
 ## Design decisions
