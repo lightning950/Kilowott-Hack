@@ -17,7 +17,7 @@ Product data is commonly split between spreadsheets and store administration. Ma
 - Includes a persistent mock store for offline development and demos.
 
 ## Key features and their impact
-
+![Product editor](docs/screenshots/editor.png)
 | Feature | How it works | Why it matters |
 |---|---|---|
 | Status lifecycle | Tracks draft, syncing, synced, out of sync, and failed. | Shows what needs work. |
