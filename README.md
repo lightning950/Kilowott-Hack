@@ -1,6 +1,6 @@
 # Catalyst PIM
 
-Catalyst PIM — a product information management system that keeps a WooCommerce catalog consistent, with variable products, attribute sets and observable two-way sync.
+Catalyst PIM — a product information management system that keeps a WooCommerce catalog consistent, with variable products, attribute sets, and observable sync to and import from WooCommerce.
 
 ![Catalyst PIM Catalog Overview](docs/screenshots/overview.png)
 
