@@ -1,0 +1,27 @@
+{
+  "name": "catalyst-pim",
+  "description": "Product information management with explicit WooCommerce synchronization.",
+  "private": true,
+  "type": "module",
+  "repository": "https://github.com/your-org/catalyst-pim",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,web -c green,blue \"npm run dev -w @pim/server\" \"npm run dev -w @pim/web\"",
+    "start": "npm run start -w @pim/server",
+    "db:migrate": "npm run db:migrate -w @pim/server",
+    "db:seed": "npm run db:seed -w @pim/server",
+    "db:seed:full": "npm run db:seed:full -w @pim/server",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test:smoke": "npm run test:smoke -w @pim/server"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
